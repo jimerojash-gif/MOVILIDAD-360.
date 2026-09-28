@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movilidad 360 | Tu camión, sin adivinar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#10263B',
+              teal: '#0E7C7B',
+              amber: '#E8A93C',
+              coral: '#C1443C',
+              cream: '#F6F4EE',
+              card: '#FFFFFF'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .contrast-high {
+      background-color: #000000 !important;
+      color: #FFFFFF !important;
+    }
+    .contrast-high header, 
+    .contrast-high footer, 
+    .contrast-high section, 
+    .contrast-high div, 
+    .contrast-high article,
+    .contrast-high nav {
+      background-color: #000000 !important;
+      color: #FFFFFF !important;
+      border-color: #FFFFFF !important;
+    }
+    .contrast-high a, 
+    .contrast-high button:not(.btn-emergency) {
+      background-color: #000000 !important;
+      color: #FFFF00 !important;
+      border: 2px solid #FFFF00 !important;
+    }
+    .contrast-high button.btn-emergency {
+      background-color: #FF0000 !important;
+      color: #FFFFFF !important;
+      border: 3px solid #FFFFFF !important;
+    }
+    .contrast-high input, 
+    .contrast-high textarea, 
+    .contrast-high select {
+      background-color: #000000 !important;
+      color: #FFFFFF !important;
+      border: 2px solid #FFFFFF !important;
+    }
+    
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: 4px solid #E8A93C !important;
+      outline-offset: 3px !important;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 10px;
+      background: #10263B;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      z-index: 100;
+      transition: top 0.2s ease;
+      text-decoration: underline;
+      font-weight: bold;
+      border-radius: 0 0 8px 8px;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    body {
+      font-size: 100%;
+      transition: font-size 0.2s ease;
+    }
+    .text-lg-mode {
+      font-size: 120%;
+    }
+  </style>
+</head>
+<body class="bg-brand-cream text-brand-dark font-sans min-h-screen flex flex-col antialiased">
+
+  <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- ENCABEZADO -->
+  <header class="bg-brand-dark text-white sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Barra superior de Accesibilidad -->
+      <div class="py-2 border-b border-gray-700 flex flex-wrap justify-between items-center text-sm gap-2" aria-label="Herramientas de accesibilidad">
+        <span class="font-medium flex items-center gap-1">
+          <svg class="w-4 h-4 text-brand-amber" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/></svg>
+          Opciones de accesibilidad:
+        </span>
+        <div class="flex items-center gap-3">
+          <button id="btn-contrast" onclick="toggleContrast()" aria-pressed="false" class="min-h-[44px] px-3 py-1 bg-gray-800 hover:bg-gray-700 text-white rounded border border-gray-600 flex items-center gap-2">
+            <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18m0-18a9 9 0 110 18 9 9 0 010-18z"/></svg>
+            <span>Alto Contraste</span>
+          </button>
+          <button id="btn-text-size" onclick="toggleTextSize()" aria-pressed="false" class="min-h-[44px] px-3 py-1 bg-gray-800 hover:bg-gray-700 text-white rounded border border-gray-600 flex items-center gap-2">
+            <span class="font-bold text-base" aria-hidden="true">A+</span>
+            <span>Aumentar Texto</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Menú principal -->
+      <div class="py-4 flex justify-between items-center flex-wrap gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-brand-teal rounded-full flex items-center justify-center text-white font-bold text-xl border-2 border-white" aria-hidden="true">
+            🚌
+          </div>
+          <span class="text-2xl font-bold tracking-tight">Movilidad 360</span>
+        </div>
+
+        <nav aria-label="Menú principal navegable">
+          <ul class="flex flex-wrap gap-1 sm:gap-2 text-sm font-medium">
+            <li><a href="#inicio" aria-current="page" class="min-h-[44px] min-w-[44px] inline-flex items-center px-3 py-2 rounded-md hover:bg-brand-teal transition-colors">Inicio</a></li>
+            <li><a href="#problema" class="min-h-[44px] min-w-[44px] inline-flex items-center px-3 py-2 rounded-md hover:bg-brand-teal transition-colors">El problema</a></li>
+            <li><a href="#que-hace" class="min-h-[44px] min-w-[44px] inline-flex items-center px-3 py-2 rounded-md hover:bg-brand-teal transition-colors">Qué hace</a></li>
+            <li><a href="#planes" class="min-h-[44px] min-w-[44px] inline-flex items-center px-3 py-2 rounded-md hover:bg-brand-teal transition-colors">Planes</a></li>
+            <li><a href="#contacto" class="min-h-[44px] min-w-[44px] inline-flex items-center px-3 py-2 rounded-md hover:bg-brand-teal transition-colors">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main id="contenido-principal" class="flex-grow">
+
+    <!-- SECCIÓN HERO / INICIO -->
+    <section id="inicio" class="py-12 md:py-20 bg-gradient-to-b from-brand-dark to-slate-800 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+            Tu camión, sin adivinar.
+          </h1>
+          <p class="text-lg sm:text-xl text-gray-200 mb-8 leading-relaxed">
+            Movilidad 360 te ofrece información exacta en tiempo real sobre rutas, tiempo de llegada, nivel de ocupación del autobús y seguridad verificada para tus trayectos diarios.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#contacto" class="min-h-[44px] px-6 py-3 bg-brand-teal hover:bg-teal-700 text-white font-bold rounded-lg shadow-lg flex items-center justify-center gap-2 text-lg">
+              <span>Registrar mi ciudad o ruta</span>
+              <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Vista previa de Tarjeta de App -->
+        <div class="bg-white text-brand-dark p-6 rounded-2xl shadow-2xl border-4 border-brand-teal max-w-md mx-auto w-full">
+          <div class="flex justify-between items-center border-b pb-4 mb-4">
+            <div>
+              <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Ruta Activa</span>
+              <h2 class="text-2xl font-bold text-brand-dark">Ruta 27 - Centro Directo</h2>
+            </div>
+            <span class="bg-green-100 text-green-800 font-semibold px-3 py-1 rounded-full text-sm border border-green-300">
+              En servicio
+            </span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="bg-brand-cream p-4 rounded-xl flex items-center justify-between">
+              <div>
+                <span class="text-sm font-semibold text-gray-600 block">Tiempo estimado de llegada</span>
+                <span class="text-3xl font-extrabold text-brand-teal">4 minutos</span>
+              </div>
+              <div class="text-3xl" aria-hidden="true">⏱️</div>
+            </div>
+
+            <div class="bg-amber-50 p-4 rounded-xl border border-brand-amber">
+              <span class="text-sm font-semibold text-gray-700 block mb-1">Nivel de saturación</span>
+              <div class="flex items-center gap-2">
+                <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                  <div class="bg-brand-amber h-4 rounded-full w-[65%]" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" aria-label="Saturación al 65 por ciento"></div>
+                </div>
+                <span class="font-bold text-sm text-gray-800">65% (Medio)</span>
+              </div>
+              <p class="text-xs text-gray-600 mt-1">Quedan asientos disponibles en la parte trasera.</p>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2">
+              <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-xl font-bold text-gray-700" aria-hidden="true">
+                👨‍✈️
+              </div>
+              <div>
+                <span class="text-xs text-gray-500 block">Conductor verificado</span>
+                <span class="font-bold text-sm text-brand-dark block">Carlos Mendoza (ID: #4829)</span>
+                <span class="text-xs text-green-700 font-semibold">✓ Antecedentes y licencia vigentes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN EL PROBLEMA -->
+    <section id="problema" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-3xl font-bold text-brand-dark mb-4">El problema en el transporte público</h2>
+        <p class="text-lg text-gray-700">Miles de usuarios enfrentan incertidumbre e inseguridad todos los días al usar el transporte público.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Tarjeta 1 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-brand-amber flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <span class="p-3 bg-amber-100 rounded-xl text-2xl" aria-hidden="true">⌛</span>
+              <h3 class="text-2xl font-bold text-brand-dark">1. Falta de Información Real</h3>
+            </div>
+            <p class="text-gray-700 text-base leading-relaxed mb-4">
+              Los usuarios pierden tiempo valioso esperando unidades sin saber si tardarán 5 minutos o 1 hora, ni si la unidad viene saturada al punto de no poder abordar.
+            </p>
+          </div>
+          <div class="bg-brand-cream p-4 rounded-lg text-sm text-gray-700">
+            <strong>Impacto:</strong> Aumento del estrés, llegadas tarde al trabajo o escuela y aglomeraciones innecesarias en paraderos.
+          </div>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-brand-coral flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <span class="p-3 bg-red-100 rounded-xl text-2xl" aria-hidden="true">🛡️</span>
+              <h3 class="text-2xl font-bold text-brand-dark">2. Inseguridad e Incertidumbre</h3>
+            </div>
+            <p class="text-gray-700 text-base leading-relaxed mb-4">
+              El desconocimiento sobre quién conduce la unidad y la falta de mecanismos inmediatos de auxilio en paraderos desolados o dentro del vehículo generan desconfianza constante.
+            </p>
+          </div>
+          <div class="bg-brand-cream p-4 rounded-lg text-sm text-gray-700">
+            <strong>Impacto:</strong> Percepción de vulnerabilidad, especialmente en horarios nocturnos o para usuarias y grupos vulnerables.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN QUÉ HACE -->
+    <section id="que-hace" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-3xl font-bold text-brand-dark mb-4">Qué hace Movilidad 360</h2>
+          <p class="text-lg text-gray-700">Una solución integral diseñada para dar certeza, accesibilidad y protección en cada viaje.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <div class="bg-brand-cream p-6 rounded-xl border border-gray-200 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 bg-brand-teal text-white rounded-lg flex items-center justify-center text-2xl mb-4" aria-hidden="true">
+                📍
+              </div>
+              <h3 class="text-xl font-bold text-brand-dark mb-2">Ubicación en tiempo real</h3>
+              <p class="text-gray-700 text-sm leading-relaxed">
+                Rastrea el paso exacto del autobús sobre el mapa y conoce los minutos precisos para su llegada a tu parada.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-brand-cream p-6 rounded-xl border border-gray-200 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 bg-brand-amber text-white rounded-lg flex items-center justify-center text-2xl mb-4" aria-hidden="true">
+                👥
+              </div>
+              <h3 class="text-xl font-bold text-brand-dark mb-2">Nivel de saturación</h3>
+              <p class="text-gray-700 text-sm leading-relaxed">
+                Visualiza si el camión viene vacío, a media capacidad o totalmente lleno antes de que llegue a la parada.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-brand-cream p-6 rounded-xl border border-gray-200 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 bg-brand-dark text-white rounded-lg flex items-center justify-center text-2xl mb-4" aria-hidden="true">
+                🆔
+              </div>
+              <h3 class="text-xl font-bold text-brand-dark mb-2">Conductor verificado</h3>
+              <p class="text-gray-700 text-sm leading-relaxed">
+                Accede a la ficha pública con nombre, fotografía y validación de licencias del operador asignado a la unidad.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-brand-cream p-6 rounded-xl border border-gray-200 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 bg-brand-coral text-white rounded-lg flex items-center justify-center text-2xl mb-4" aria-hidden="true">
+                🚨
+              </div>
+              <h3 class="text-xl font-bold text-brand-dark mb-2">Botón de emergencia</h3>
+              <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                Envía inmediatamente tu ubicación geolocalizada y datos de la unidad a contactos de confianza y autoridades.
+              </p>
+            </div>
+            <button onclick="alert('Demostración: En una situación real, este botón envía tu ubicación en tiempo real al 911 y a tus contactos de emergencia.')" class="btn-emergency w-full min-h-[44px] bg-brand-coral hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2">
+              <span aria-hidden="true">⚠️</span>
+              <span>Probar Botón de Auxilio</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PLANES -->
+    <section id="planes" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-3xl font-bold text-brand-dark mb-4">Planes y Esquemas de Servicio</h2>
+        <p class="text-lg text-gray-700">Soluciones sostenibles diseñadas para usuarios, operadores y gobiernos locales.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Plan 1 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-brand-teal uppercase tracking-wider block mb-1">Para el Ciudadano</span>
+            <h3 class="text-2xl font-bold text-brand-dark mb-2">Gratuito</h3>
+            <p class="text-3xl font-extrabold text-brand-dark mb-4">$0 <span class="text-sm font-normal text-gray-500">/ siempre</span></p>
+            <ul class="space-y-2 text-sm text-gray-700 mb-6">
+              <li class="flex items-center gap-2">✓ Ubicación en tiempo real</li>
+              <li class="flex items-center gap-2">✓ Nivel de ocupación</li>
+              <li class="flex items-center gap-2">✓ Botón de emergencia básico</li>
+            </ul>
+          </div>
+          <a href="#contacto" class="w-full min-h-[44px] bg-gray-100 hover:bg-gray-200 text-brand-dark font-bold py-2 px-4 rounded-lg text-center flex items-center justify-center">Usar gratis</a>
+        </div>
+
+        <!-- Plan 2 -->
+        <div class="bg-white p-6 rounded-xl shadow-xl border-2 border-brand-teal flex flex-col justify-between relative">
+          <span class="absolute -top-3 right-4 bg-brand-teal text-white text-xs font-bold px-3 py-1 rounded-full">Recomendado</span>
+          <div>
+            <span class="text-xs font-bold text-brand-teal uppercase tracking-wider block mb-1">Pasajero Frecuente</span>
+            <h3 class="text-2xl font-bold text-brand-dark mb-2">Premium</h3>
+            <p class="text-3xl font-extrabold text-brand-dark mb-4">$29 <span class="text-sm font-normal text-gray-500">MXN / mes</span></p>
+            <ul class="space-y-2 text-sm text-gray-700 mb-6">
+              <li class="flex items-center gap-2">✓ Todo lo del plan Gratuito</li>
+              <li class="flex items-center gap-2">✓ Alertas de llegada personalizadas</li>
+              <li class="flex items-center gap-2">✓ Cero publicidad</li>
+              <li class="flex items-center gap-2">✓ Compartir viaje con 5 contactos</li>
+            </ul>
+          </div>
+          <a href="#contacto" class="w-full min-h-[44px] bg-brand-teal hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-lg text-center flex items-center justify-center">Obtener Premium</a>
+        </div>
+
+        <!-- Plan 3 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-brand-teal uppercase tracking-wider block mb-1">Sector Público</span>
+            <h3 class="text-2xl font-bold text-brand-dark mb-2">Gobierno</h3>
+            <p class="text-xl font-bold text-brand-dark mb-4">Convenio Institucional</p>
+            <ul class="space-y-2 text-sm text-gray-700 mb-6">
+              <li class="flex items-center gap-2">✓ Panel de monitoreo de flota</li>
+              <li class="flex items-center gap-2">✓ Métricas de movilidad e itinerarios</li>
+              <li class="flex items-center gap-2">✓ Enlace directo con C4 / C5</li>
+            </ul>
+          </div>
+          <a href="#contacto" class="w-full min-h-[44px] bg-brand-dark hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-lg text-center flex items-center justify-center">Solicitar convenio</a>
+        </div>
+
+        <!-- Plan 4 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-brand-teal uppercase tracking-wider block mb-1">Comercio Local</span>
+            <h3 class="text-2xl font-bold text-brand-dark mb-2">Publicidad</h3>
+            <p class="text-xl font-bold text-brand-dark mb-4">Anuncios Geolocalizados</p>
+            <ul class="space-y-2 text-sm text-gray-700 mb-6">
+              <li class="flex items-center gap-2">✓ Anuncios cerca de paraderos</li>
+              <li class="flex items-center gap-2">✓ Promociones para usuarios en ruta</li>
+              <li class="flex items-center gap-2">✓ Formato accesible no invasivo</li>
+            </ul>
+          </div>
+          <a href="#contacto" class="w-full min-h-[44px] bg-gray-100 hover:bg-gray-200 text-brand-dark font-bold py-2 px-4 rounded-lg text-center flex items-center justify-center">Anunciar negocio</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO ACCESIBLE -->
+    <section id="contacto" class="py-16 bg-white border-t border-gray-200">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-brand-dark mb-2">Ponte en contacto</h2>
+          <p class="text-gray-700">¿Tienes dudas o quieres llevar Movilidad 360 a tu ciudad? Déjanos tu mensaje.</p>
+        </div>
+
+        <form onsubmit="handleSubmit(event)" class="space-y-6 bg-brand-cream p-8 rounded-2xl border border-gray-300">
+          <div>
+            <label for="nombre" class="block text-sm font-bold text-brand-dark mb-1">
+              Nombre completo <span class="text-brand-coral" aria-hidden="true">*</span>
+            </label>
+            <p id="nombre-ayuda" class="text-xs text-gray-600 mb-2">Escribe tu nombre y apellidos.</p>
+            <input type="text" id="nombre" name="nombre" required aria-describedby="nombre-ayuda" class="w-full p-3 border border-gray-400 rounded-lg text-brand-dark focus:ring-2 focus:ring-brand-teal">
+          </div>
+
+          <div>
+            <label for="correo" class="block text-sm font-bold text-brand-dark mb-1">
+              Correo electrónico <span class="text-brand-coral" aria-hidden="true">*</span>
+            </label>
+            <p id="correo-ayuda" class="text-xs text-gray-600 mb-2">Usaremos este correo únicamente para responder a tu solicitud.</p>
+            <input type="email" id="correo" name="correo" required aria-describedby="correo-ayuda" class="w-full p-3 border border-gray-400 rounded-lg text-brand-dark focus:ring-2 focus:ring-brand-teal">
+          </div>
+
+          <div>
+            <label for="tipo-usuario" class="block text-sm font-bold text-brand-dark mb-1">
+              ¿Cómo te relacionas con la plataforma? <span class="text-brand-coral" aria-hidden="true">*</span>
+            </label>
+            <p id="tipo-ayuda" class="text-xs text-gray-600 mb-2">Selecciona la opción que mejor describa tu perfil.</p>
+            <select id="tipo-usuario" name="tipo-usuario" required aria-describedby="tipo-ayuda" class="w-full p-3 border border-gray-400 rounded-lg text-brand-dark focus:ring-2 focus:ring-brand-teal">
+              <option value="">-- Selecciona una opción --</option>
+              <option value="pasajero">Pasajero / Usuario habitual</option>
+              <option value="conductor">Conductor de transporte público</option>
+              <option value="gobierno">Representante de gobierno / concesionario</option>
+              <option value="anunciante">Comerciante / Anunciante local</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="mensaje" class="block text-sm font-bold text-brand-dark mb-1">
+              Mensaje o Comentario <span class="text-brand-coral" aria-hidden="true">*</span>
+            </label>
+            <p id="mensaje-ayuda" class="text-xs text-gray-600 mb-2">Escribe los detalles de tu consulta o sugerencia.</p>
+            <textarea id="mensaje" name="mensaje" rows="4" required aria-describedby="mensaje-ayuda" class="w-full p-3 border border-gray-400 rounded-lg text-brand-dark focus:ring-2 focus:ring-brand-teal"></textarea>
+          </div>
+
+          <button type="submit" class="w-full min-h-[44px] bg-brand-teal hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg text-lg flex items-center justify-center gap-2">
+            <span>Enviar mensaje</span>
+            <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+          </button>
+
+          <div id="mensaje-exito" role="status" aria-live="polite" class="hidden p-4 bg-green-100 border border-green-400 text-green-800 rounded-lg text-center font-bold">
+            ¡Gracias por tu mensaje! Nos pondremos en contacto contigo a la brevedad.
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="bg-brand-dark text-white py-12 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-2xl" aria-hidden="true">🚌</span>
+          <span class="text-xl font-bold">Movilidad 360</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Plataforma tecnológica para el transporte público accesible, seguro e informado.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-bold mb-4 text-brand-amber">Enlaces rápidos</h3>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><a href="#inicio" class="hover:underline min-h-[44px] inline-flex items-center">Inicio</a></li>
+          <li><a href="#problema" class="hover:underline min-h-[44px] inline-flex items-center">El problema</a></li>
+          <li><a href="#que-hace" class="hover:underline min-h-[44px] inline-flex items-center">Qué hace</a></li>
+          <li><a href="#planes" class="hover:underline min-h-[44px] inline-flex items-center">Planes</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-bold mb-4 text-brand-amber">Contacto e Inclusión</h3>
+        <p class="text-gray-300 text-sm mb-2">Correo: soporte@movilidad360.example</p>
+        <p class="text-gray-300 text-sm mb-4">Teléfono accesible: 800-000-M360</p>
+        <p class="text-xs text-gray-400">
+          Sitio diseñado bajo pautas de accesibilidad WCAG 2.1 Nivel AA.
+        </p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-gray-800 text-center text-xs text-gray-400">
+      <p>&copy; 2026 Movilidad 360. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- LÓGICA DE JAVASCRIPT -->
+  <script>
+    function toggleContrast() {
+      const body = document.body;
+      const btn = document.getElementById('btn-contrast');
+      const isHigh = body.classList.toggle('contrast-high');
+      btn.setAttribute('aria-pressed', isHigh ? 'true' : 'false');
+    }
+
+    function toggleTextSize() {
+      const body = document.body;
+      const btn = document.getElementById('btn-text-size');
+      const isLarge = body.classList.toggle('text-lg-mode');
+      btn.setAttribute('aria-pressed', isLarge ? 'true' : 'false');
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      const exito = document.getElementById('mensaje-exito');
+      exito.classList.remove('hidden');
+      event.target.reset();
+      exito.focus();
+    }
+  </script>
+</body>
+</html>
